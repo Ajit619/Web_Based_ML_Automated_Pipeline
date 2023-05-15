@@ -1,0 +1,1 @@
+['Data and Time', 'Description'],["10-04-2023 04:35:14","New .csv file is loaded with Hotel Reservations file.csv name"],['10-04-2023 04:35:18', 'Booking_IDcolumn removed from data'],['10-04-2023 04:35:23', 'Skip and Redirect to Handle Missing Values step']

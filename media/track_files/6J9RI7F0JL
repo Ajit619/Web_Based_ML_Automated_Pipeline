@@ -1,0 +1,1 @@
+['Data and Time', 'Description'],["26-04-2023 17:44:39","New .csv file is loaded with adult.csv name"],['26-04-2023 17:44:45', '77516column removed from data'],['26-04-2023 17:44:52', 'Skip and Redirect to Handle Missing Values step'],['26-04-2023 17:44:56', 'Skipped and Redirect to Label Encoding step']

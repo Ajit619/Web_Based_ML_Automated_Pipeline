@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <style> 
+      body {
+        background-image : url("/media/images/bg.jpg"  )   ;background-position: center;
+      
+      background-repeat: no-repeat;
+      background-size: cover;
+        background-attachment: fixed;     
+    }   
+      .hoverme:hover{ background-color: #f8f9fa; color: black;
+        transition-duration: 1s;        
+      }      
+      th{
+       
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+        z-index: 10;   
+      }
+      .nav-item-des{
+    display: block; padding: 16px;
+  color: #000000; border-radius: 10px;
+  text-decoration: none;
+  }
+  .nav-item-des:hover{
+    background-color: rgba(146, 145, 145,0.5);
+  }
+  
+      #option{
+          padding: 0% 6%;
+      }
+      label{
+          margin: 1% 0%;
+      }
+      model2{
+        --bs-modal-width: 700px;
+      }       
+      </style>
+      
+    <script>
+      
+      let x=1
+      function moreinfo() {
+    
+        if( x==0)
+        {
+          document.getElementById("code").style.display='none';
+          x=1;
+          document.getElementById('info').innerText="Show more Info";
+          
+        }
+        else if(x==1)
+        {
+          
+          document.getElementById("code").style.display='inline';
+          x=0;
+          document.getElementById('info').innerText="Show less Info";
+        }
+      }      
+    </script>
+    <title>Detect & Remove Outliers</title>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark" aria-label="Light offcanvas navbar">
+        <div class="container-fluid">
+          <a class="navbar-brand mx-auto"   style="font-size: 2.5vh;"  href="#">Web Based ML Automated Pipeline</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbarLight" aria-controls="offcanvasNavbarLight">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbarLight" aria-labelledby="offcanvasNavbarLightLabel">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasNavbarLightLabel">Web Based ML Automated Pipeline</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item">
+              
+                  <h5>
+                    <a class="nav-item-des active"   target="_blank" href="https://www.Github.com/MaheshSirsat/">Source Code</a>
+                  </h5>
+                  <h5>
+                    <a class="nav-item-des active"  target="_blank" href="">Contact Us</a>
+                  </h5>
+                  <h5>
+                    <a class="nav-item-des active" target="_blank" href="">About Us</a>
+                  </h5>
+                  </li>  
+                  </ul>
+                </li>
+              </ul>
+             
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <div    class=" modal  position-static d-block  py-5 " tabindex="-1"  role="dialog" id="modalSheet">
+        <div class="modal-dialog "  role="document">
+          <div class="modal-content rounded-4 shadow"> 
+            <center>
+            <div class="modal-body py-4 ">
+           <h4 >Detect & Remove Outliers</h4> <hr>
+           <form action="/outliers/" method="post">
+            {% csrf_token %}
+           
+            <label for="option">  Dataset Column Name: &nbsp; </label>
+
+              <select name="option" id="option">
+                {%for col in column_name%}
+                <option >{{col}}</option>
+                {%endfor%}
+              </select>
+               <br>
+               <textarea name="data" hidden id="" >{{data}}</textarea>
+               <textarea name="column_name" hidden id="" >{{column_name}}</textarea>
+               <textarea name="track_filename" hidden id="" >{{track_filename}}</textarea>
+               <textarea name="is_abr" hidden id="" >{{is_abr}}</textarea>
+               {%if is_abr%}
+               <textarea name="abr" hidden id="" >{{abr}}</textarea>
+               <textarea name="is_abr" hidden id="" >{{is_abr}}</textarea>
+               {%endif%}
+
+                <div style="margin-top: 1%; margin-bottom: 4%;">
+                
+                    <button class="hoverme btn btn-success" type="submit" >Identify</button>
+                    {% if detect %} <hr> <center>
+
+                      <h4>Values to Remove</h4><hr>
+                      <label for="option">  Dataset Column Name: </label>
+
+                      <select name="option3" id="option">
+                        <option selected >{{select_col}}</option>
+                         <br>
+                      </select>
+                     
+                      <div id="show">
+                        <label >Less Than :</label>
+                        <input  type="number"  step=0.01 name="less" id=""><br>
+                        <label >Greater Than :</label>
+                        <input  type="number"  step=0.01 name="more" id="">
+                      </div><br>
+                      
+                      <button  class="hoverme btn btn-success" type="submit" >Remove</button><br>
+                    </center>
+                      {% else %}
+                      
+                      <button class="hoverme btn btn-secondary " disabled >Remove</button><br>
+                      {% endif %}
+                   
+                    
+                  </div>  
+                  <button id="skipme" value="some" name="skip" class="hoverme btn btn-danger"  type="submit" >Skip this step</button>
+                  </form>
+    <button onclick="moreinfo()" id="info" class="hoverme btn btn-light" >Show more info </button>
+                    
+            </center>
+            
+            <div style="padding: 0% 4%;" id="code">
+              <center style="padding: 0% 4%;">An outlier is an object that deviates significantly from the rest of the objects. They can be caused by measurement or execution error. The analysis of outlier data is referred to as outlier analysis or outlier mining. <a target="_blank" href="https://plotly.com/python/box-plots/">For More Info...</a></center>
+              <table style="overflow: scroll; " class="table">
+                <tbody>
+                  <tr><td style="text-align: center;"><b>Code:</b></td></tr>
+                  <tr>
+                    <td>import plotly.express as plotly</td>
+                  </tr>
+                  <tr>
+                   <td>fig=plotly.box(data['column_name'])</td>
+                  </tr>
+                  <tr>
+                    <td>data= data.drop(data[data['column_name'] <= value].index)</td>
+                  </tr>
+             </tbody>
+              </table>
+            </div>
+            
+            </div>
+           
+          </div>
+        </div>
+      </div>
+
+           {% if detect %}
+           <div style="margin-top: 0%; --bs-modal-width: 800px;"  class="model2 modal  position-static d-block  py-5 " tabindex="-1"  role="dialog" id="modalSheet">
+            <div class="modal-dialog "  role="document">
+              <div class="modal-content rounded-4 shadow">
+                <center> 
+                <div class="modal-body py-4 ">
+               <h4 >Figure</h4> <hr>
+          
+           <img src={{file_url}} alt=""> 
+          </div>
+           
+        </div>
+      </div>
+    </div> 
+           {% endif %}
+            </center>
+  <div style="margin-top: 0%; --bs-modal-width: 800px;"  class="model2 modal  position-static d-block  py-5 " tabindex="-1"  role="dialog" id="modalSheet">
+      <div class="modal-dialog "  role="document">
+        <div class="modal-content rounded-4 shadow">
+          <center> 
+          <div class="modal-body py-4 ">
+         <h4 >Data</h4> <hr>
+         
+          <div style="overflow:scroll; height: 35rem; " >
+ 
+            <table   class="table  table-hover ">
+              <thead>
+                <tr >
+                {%for col in column_name%}
+              
+                      <th style="background-color: black; color:#f8f9fa" scope="col">{{col}}</th>
+                {%endfor%}
+                </tr>
+              </thead>
+              <tbody>
+                {%for col in data%}
+                <tr>
+                    {%for dat in col%}
+                    <td>{{dat}}</td>
+                      
+                    {%endfor%}
+                    <tr>   
+                {%endfor%}
+               
+              </tbody>
+            </table>
+         
+          </div>           
+          </center>
+          </div>
+         
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+     
+</body>
+
+</html>

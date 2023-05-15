@@ -1,0 +1,1 @@
+['Data and Time', 'Description'],["10-04-2023 05:51:03","New .csv file is loaded with Hotel_Reservations_Lxncl0D.csv name"],['10-04-2023 05:51:04', 'Skip and Redirect to Handle Missing Values step'],['10-04-2023 05:51:06', 'Skipped and Redirect to Label Encoding step'],['10-04-2023 05:51:08', 'Done Label Encoding of Booking_ID column name from data']

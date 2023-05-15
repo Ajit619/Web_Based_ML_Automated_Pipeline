@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <style>
+      body {
+        background-image : url("/media/images/bg.jpg"  )   ;background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;   
+  }
+      #check{
+      display: none;
+}
+.hoverme:hover{ background-color: #f8f9fa; color: black;
+      transition-duration: 1s;
+      
+    }    
+    table{
+      border-radius: 20px;
+    }
+    th{
+     
+      position: -webkit-sticky;
+      position: sticky;
+      top: 0;
+      z-index: 10;  
+    }
+    #option{
+        padding: 0% 6%;
+    }
+    label{
+        margin: 1% 0%;
+    }
+    .nav-item-des{
+    display: block; padding: 16px;
+  color: #000000; border-radius: 10px;
+  text-decoration: none;
+  }
+  .nav-item-des:hover{
+    background-color: rgba(146, 145, 145,0.5);
+  }
+    model2{
+      --bs-modal-width: 700px;
+    } 
+    </style>
+    <script>
+      let x=1
+      function moreinfo() {    
+        if( x==0)
+        {
+          document.getElementById("code").style.display='none';
+          x=1;
+          document.getElementById('info').innerText="Show more Info";
+          
+        }
+        else if(x==1)
+        {
+          
+          document.getElementById("code").style.display='inline';
+          x=0;
+          document.getElementById('info').innerText="Show less Info";
+        }
+      } 
+      let y=0
+      function abbrinfo() {    
+        if( y==0)
+        {
+          document.getElementById("abbrinfo").style.display='none';
+          y=1;
+          document.getElementById('abbrbtn').innerText="Show Abbrevations";
+          
+        }
+        else if(y==1)
+        {
+          
+          document.getElementById("abbrinfo").style.display='inline';
+          y=0;
+          document.getElementById('abbrbtn').innerText="Hide Abbrevations";
+        }
+      }   
+      let z=1
+      function resultabbrinfo() {    
+        if( z==0)
+        {
+          document.getElementById("resultabbrinfo").style.display='none';
+          z=1;
+          document.getElementById('resultabbrbtn').innerText="Show Abbrevations";
+          
+        }
+        else if(z==1)
+        {
+          
+          document.getElementById("resultabbrinfo").style.display='inline';
+          z=0;
+          document.getElementById('resultabbrbtn').innerText="Hide Abbrevations";
+        }
+      }   
+    </script>
+    <title>Model Prediction</title>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark" aria-label="Light offcanvas navbar">
+        <div class="container-fluid">
+          <a class="navbar-brand mx-auto"   style="font-size: 2.5vh;" href="#">Web Based ML Automated Pipeline</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbarLight" aria-controls="offcanvasNavbarLight">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbarLight" aria-labelledby="offcanvasNavbarLightLabel">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasNavbarLightLabel">Web Based ML Automated Pipeline</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item">
+              
+                  <h5>
+                    <a class="nav-item-des active"   target="_blank" href="https://www.Github.com/MaheshSirsat/">Source Code</a>
+                  </h5>
+                  <h5>
+                    <a class="nav-item-des active"  target="_blank" href="">Contact Us</a>
+                  </h5>
+                  <h5>
+                    <a class="nav-item-des active" target="_blank" href="">About Us</a>
+                  </h5>
+                  </li>                
+                  </ul>
+                </li>
+              </ul>
+             
+            </div>
+          </div>
+        </div>
+      </nav>
+      {%if is_result%}
+      <div    class=" modal  position-static d-block  py-5 " tabindex="-1"  role="dialog" id="modalSheet">
+        <div class="modal-dialog "  role="document">
+          <div class="modal-content rounded-4 shadow"> 
+            <center>
+            <div class="modal-body py-4 ">
+           <h4 >Model Result</h4> <hr>
+
+           
+
+           
+            <div class="tablebox">
+            <table class=" table  table-striped">
+              <tbody>
+                  <thead style="background-color: #000000; color: white; border-radius: 20px;" class="thead-dark">
+                    <tr>
+                      <th scope="col">Column Name</th>
+                      <th scope="col">User Input</th>
+                      
+                    </tr>
+                  </thead>
+            {% for col in input%}
+                <tr>
+                  <td>{{col.0}}</td>
+                  <td>{{col.1}}</td>
+                </tr>
+                {%endfor%}
+              </tbody>
+            </table>
+          </div>
+     
+            
+            <h4>Result : {{result}}</h4>
+
+            <hr>
+            
+            
+            
+             
+                
+           
+                    <button onclick="moreinfo()" id="info" class="hoverme btn btn-light" >Show more info </button>
+                    {%if is_abr %}
+                    <button onclick="resultabbrinfo()" id="resultabbrbtn" class="hoverme btn btn-light" >Hide Abbrevations</button>
+                  {%endif%}
+                    
+                    <div style="padding: 0% 4%;" id="code">
+                      <center style="padding: 0% 4%;">
+                        Predictive modeling is a mathematical process used to predict future events or outcomes by analyzing patterns in a given set of input data. It is a crucial component of predictive analytics, a type of data analytics which uses current and historical data to forecast activity, behavior and trends. <a target="_blank" href="https://scikit-learn.org/stable/tutorial/statistical_inference/supervised_learning.html">For More Info...</a></center>
+                      <table style="overflow: scroll; " class="table">
+                        <tbody>
+                          <tr><td style="text-align: center;"><b>Code:</b></td></tr>
+                          <tr>
+                           <td>predict=model.predict(new_data)</td>
+                          </tr>
+                          
+                           
+        
+                        </tbody>
+                      </table>
+                    </div>
+                    {%if  is_abr%}
+                        <!-- <button onclick="abbrinfo()" id="abbrbtn" class="hoverme btn btn-light" >Hide Abbrevations</button> -->
+                      <div style="padding: 0% 4%; display: none;"  id="resultabbrinfo">
+
+                        <h4>Abbrevation</h4>
+                        
+                        
+                        {% for key, value in abr.items%}
+                     
+        <h5>{{key}} 
+        </h5>
+          
+        <table class="table">{%for j in value  %}  
+         <tr>
+          <td>{{j.0}}</td>
+          <td>{{j.1}}</td>
+         </tr>
+       
+          {%endfor%} </table> {% endfor %} {%endif%}   </div>
+                    
+            </center>
+                        <!-- <div style="padding: 0% 4%;" id="code">
+              <center style="padding: 0% 4%;">
+                Predictive modeling is a mathematical process used to predict future events or outcomes by analyzing patterns in a given set of input data. It is a crucial component of predictive analytics, a type of data analytics which uses current and historical data to forecast activity, behavior and trends. <a target="_blank" href="https://scikit-learn.org/stable/tutorial/statistical_inference/supervised_learning.html">For More Info...</a></center>
+              <table style="overflow: scroll; " class="table">
+                <tbody>
+                  <tr><td style="text-align: center;"><b>Code:</b></td></tr>
+                  <tr>
+                   <td>predict=model.predict(new_data)</td>
+                  </tr>
+                  
+                   
+
+                </tbody>
+              </table>
+            </div> -->
+            
+            </div>
+           
+          </div>
+        </div>
+      </div>
+      {%endif%}
+
+    <!-- ------------------------------------------------------------------- -->
+    <div    class=" modal  position-static d-block  py-5 " tabindex="-1"  role="dialog" id="modalSheet">
+      <div class="modal-dialog "  role="document">
+        <div class="modal-content rounded-4 shadow"> 
+          <center>
+          <div class="modal-body py-4 ">
+         <h4 >Model Prediction</h4> <hr>
+
+         <form action="/predict/" method="post">
+          {% csrf_token %}
+          <textarea name="feature_data" hidden id="" >{{feature_data}}</textarea>
+          <textarea name="feature_name" hidden id="" >{{feature_name}}</textarea>
+          <textarea name="track_filename" hidden id="" >{{track_filename}}</textarea>
+          <textarea name="target_data" hidden id="" >{{target_data}}</textarea>
+             <textarea name="target_name" hidden id="" >{{target_name}}</textarea>
+             <textarea name="data" hidden id="" >{{data}}</textarea>
+             <textarea name="column_name" hidden id="" >{{column_name}}</textarea>
+             <textarea name="feature_train" hidden id="" >{{feature_train}}</textarea>
+          <textarea name="feature_test" hidden id="" >{{feature_test}}</textarea>
+          <textarea name="target_train" hidden id="" >{{target_train}}</textarea>
+             <textarea name="target_test" hidden id="" >{{target_test}}</textarea>
+             <textarea name="input" hidden id="" >{{input}}</textarea>
+             <textarea name="result" hidden id="" >{{result}}</textarea>
+             <textarea name="model_path" hidden id="" >{{model_path}}</textarea>
+             <textarea name="model_name" hidden id="" >{{model_name}}</textarea>
+             <textarea name="scaler_type" hidden id="" >{{scaler_type}}</textarea>
+             <textarea name="is_abr" hidden id="" >{{is_abr}}</textarea>
+             <textarea name="abr" hidden id="" >{{abr}}</textarea>
+
+          
+          {% for col in feature_name%}
+          <label  for="">{{col}}</label>
+          <input style="text-align: center;"  type="number" required step=0.01 name={{col}} > <br>
+          {%endfor%}
+          
+          
+              
+            
+              
+              <div style="float: right;margin-top: 1%; margin-bottom: 4%;">
+                  <br>
+                  <button class="hoverme btn btn-success" type="submit" >Predict</button> <br>
+              </form>
+                
+                
+              </div>  
+              
+                <br>
+         
+                  <button onclick="moreinfo()" id="info" class="hoverme btn btn-light" >Show more info </button>
+                  {%if is_abr %}
+                  <button onclick="abbrinfo()" id="abbrbtn" class="hoverme btn btn-light" >Hide Abbrevations</button>
+                {%endif%}
+                  <!-- <button onclick="abbrinfo()" id="info" class="hoverme btn btn-light" >Hide Abbrevations</button> -->
+                  <div style="padding: 0% 4%;" id="code">
+                    <center style="padding: 0% 4%;">
+                      Predictive modeling is a mathematical process used to predict future events or outcomes by analyzing patterns in a given set of input data. It is a crucial component of predictive analytics, a type of data analytics which uses current and historical data to forecast activity, behavior and trends. <a target="_blank" href="https://scikit-learn.org/stable/tutorial/statistical_inference/supervised_learning.html">For More Info...</a></center>
+                    <table style="overflow: scroll; " class="table">
+                      <tbody>
+                        <tr><td style="text-align: center;"><b>Code:</b></td></tr>
+                        <tr>
+                         <td>predict=model.predict(new_data)</td>
+                        </tr>
+                        
+                         
+      
+                      </tbody>
+                    </table>
+                  </div>
+                  {%if  is_abr%}
+                      <!-- <button onclick="abbrinfo()" id="abbrbtn" class="hoverme btn btn-light" >Hide Abbrevations</button> -->
+                    <div style="padding: 0% 4%;"  id="abbrinfo">
+
+                      <h4>Abbrevation</h4>
+                      
+                      
+                      {% for key, value in abr.items%}
+                   
+      <h5>{{key}} 
+      </h5>
+        
+      <table class="table">{%for j in value  %}  
+       <tr>
+        <td>{{j.0}}</td>
+        <td>{{j.1}}</td>
+       </tr>
+     
+        {%endfor%} </table> {% endfor %} {%endif%}   </div>
+                  
+          </center>
+                      <!-- <div style="padding: 0% 4%;" id="code">
+            <center style="padding: 0% 4%;">
+              Predictive modeling is a mathematical process used to predict future events or outcomes by analyzing patterns in a given set of input data. It is a crucial component of predictive analytics, a type of data analytics which uses current and historical data to forecast activity, behavior and trends. <a target="_blank" href="https://scikit-learn.org/stable/tutorial/statistical_inference/supervised_learning.html">For More Info...</a></center>
+            <table style="overflow: scroll; " class="table">
+              <tbody>
+                <tr><td style="text-align: center;"><b>Code:</b></td></tr>
+                <tr>
+                 <td>predict=model.predict(new_data)</td>
+                </tr>
+                
+                 
+
+              </tbody>
+            </table>
+          </div> -->
+          
+          </div>
+         
+        </div>
+      </div>
+    </div>
+
+
+
+
+      
+
+    <!-- ----------------------------------------------------------------------------------------------------------------------------------- -->
+      
+    <center>
+        <form action="/download/" method="post">
+          {% csrf_token %}
+          <textarea name="track_filename" hidden id="" >{{track_filename}}</textarea>
+          <textarea name="feature_data" hidden id="" >{{feature_data}}</textarea>
+          <textarea name="feature_name" hidden id="" >{{feature_name}}</textarea>
+          <textarea name="target_data" hidden id="" >{{target_data}}</textarea>
+             <textarea name="target_name" hidden id="" >{{target_name}}</textarea>
+             <textarea name="data" hidden id="" >{{data}}</textarea>
+             <textarea name="column_name" hidden id="" >{{column_name}}</textarea>
+             <textarea name="feature_train" hidden id="" >{{feature_train}}</textarea>
+          <textarea name="feature_test" hidden id="" >{{feature_test}}</textarea>
+          <textarea name="target_train" hidden id="" >{{target_train}}</textarea>
+             <textarea name="target_test" hidden id="" >{{target_test}}</textarea>
+             <textarea name="is_abr" hidden id="" >{{is_abr}}</textarea>
+             <textarea name="abr" hidden id="" >{{abr}}</textarea>
+         
+            <button class="hoverme btn btn-success btn-lg" type="submit" name="action" value="pdf" >Download PDF</button>
+            <button class="hoverme btn btn-success btn-lg" type="submit"name="action" value="trackable_pdf" >Download Trackable PDF</button>
+        
+     
+              <button class="hoverme btn btn-success btn-lg" type="submit" name="action" value="csv" >Download CSV</button>
+     
+
+        </form>      
+    </center>
+</body>
+
+</html>

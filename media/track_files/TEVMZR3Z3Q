@@ -1,0 +1,1 @@
+['Data and Time', 'Description'],["26-04-2023 17:45:32","New .csv file is loaded with Iris.csv name"],['26-04-2023 17:45:34', 'Idcolumn removed from data'],['26-04-2023 17:45:34', 'Skip and Redirect to Handle Missing Values step'],['26-04-2023 17:45:35', 'Skipped and Redirect to Label Encoding step'],['26-04-2023 17:45:37', 'Done Label Encoding of Species column name from data']
