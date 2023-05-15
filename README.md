@@ -1,1 +1,12 @@
 # Web_Based_ML_Automated_Pipeline
+![image](https://github.com/Ajit619/Web_Based_ML_Automated_Pipeline/assets/77828414/68fb98ef-e673-48e5-acb9-179078a2f5f3)
+![image](https://github.com/Ajit619/Web_Based_ML_Automated_Pipeline/assets/77828414/23f74c68-8ec9-4778-aa52-a483871baac0)
+![image](https://github.com/Ajit619/Web_Based_ML_Automated_Pipeline/assets/77828414/e977b2c6-04a4-4eef-9059-7ac36d502566)
+![image](https://github.com/Ajit619/Web_Based_ML_Automated_Pipeline/assets/77828414/83e69c60-d25f-4b97-b0f3-883c1d0e42a4)
+![image](https://github.com/Ajit619/Web_Based_ML_Automated_Pipeline/assets/77828414/5d5b5e5e-d895-4126-827d-982b280fb4a0)
+![image](https://github.com/Ajit619/Web_Based_ML_Automated_Pipeline/assets/77828414/82838768-8e1a-4631-942e-c2c064296522)
+![image](https://github.com/Ajit619/Web_Based_ML_Automated_Pipeline/assets/77828414/bef274e9-50f3-4751-b03e-f7cc477cfcb6)
+![image](https://github.com/Ajit619/Web_Based_ML_Automated_Pipeline/assets/77828414/9ca45457-0e14-4413-b238-afefa8d2597c)
+![image](https://github.com/Ajit619/Web_Based_ML_Automated_Pipeline/assets/77828414/bdaa0274-6d64-452a-8273-b7cd6a318313)
+![image](https://github.com/Ajit619/Web_Based_ML_Automated_Pipeline/assets/77828414/de3615f9-3053-448c-9f4d-01c38693feec)
+![image](https://github.com/Ajit619/Web_Based_ML_Automated_Pipeline/assets/77828414/9712370f-3175-4cc4-a333-d92b71935aad)
